@@ -30,7 +30,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $inputs = $request->all();
+
+        $product = Product::create($inputs);
+
+        return response([
+            'data' => $product,
+            'message' => 'Record added successfully'
+        ], 201);
     }
 
     /**
@@ -43,14 +50,14 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-        if($product){
+        if ($product) {
 
-            return response($product,200);
+            return response($product, 200);
         } else {
 
             return response([
                 'message' => 'No Such As Record'
-            ],404);
+            ], 404);
 
         }
     }
