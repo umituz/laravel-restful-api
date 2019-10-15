@@ -13,13 +13,20 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Product[]|Collection
      */
-    public function index()
+    public function index(Request $request)
     {
 //        return Product::all();
 //        return response()->json(Product::all(),200);
-        return response(Product::all(), 200);
+//        return response(Product::all(), 200);
+//        return response(Product::paginate(3), 200);
+
+        $offset = $request->offset ?? 0;
+        $limit = $request->limit ?? 3;
+
+        return response(Product::offset($offset)->limit($limit)->get(), 200);
     }
 
     /**
@@ -43,7 +50,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param Product $product
+     * @param $id
      * @return Product
      */
     public function show($id)
