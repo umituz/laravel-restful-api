@@ -78,7 +78,7 @@ class ProductController extends Controller
         return response([
             'data' => $product,
             'message' => 'Record edited successfully'
-        ], 201);
+        ], 200);
     }
 
     /**
@@ -86,9 +86,14 @@ class ProductController extends Controller
      *
      * @param Product $product
      * @return Response
+     * @throws \Exception
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return response([
+            'message' => 'Record deleted successfully'
+        ], 200);
     }
 }
