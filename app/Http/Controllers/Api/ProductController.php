@@ -71,7 +71,14 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $inputs = $request->all();
+
+        $product->update($inputs);
+
+        return response([
+            'data' => $product,
+            'message' => 'Record edited successfully'
+        ], 201);
     }
 
     /**
