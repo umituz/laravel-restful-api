@@ -20,7 +20,7 @@ class CategoriesTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0');
 
         DB::table('categories')->truncate();
-        DB::table('product_category')->truncate();
+        DB::table('category_product')->truncate();
 
         for ($i = 0; $i < 20; $i++) {
 
@@ -33,7 +33,7 @@ class CategoriesTableSeeder extends Seeder
 
         }
 
-        DB::table('product_category')->insert([
+        DB::table('category_product')->insert([
             ['product_id' => 1, 'category_id' => 1],
             ['product_id' => 1, 'category_id' => 2],
             ['product_id' => 2, 'category_id' => 1],
