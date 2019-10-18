@@ -32,8 +32,8 @@ class ProductController extends Controller
             $products->where('name', 'like', '%' . $request->query('q') . '%');
         }
 
-        if($request->has('sortBy')){
-            $products->orderBy($request->query('sortBy'),$request->query('sort','DESC'));
+        if ($request->has('sortBy')) {
+            $products->orderBy($request->query('sortBy'), $request->query('sort', 'DESC'));
         }
 
         $data = $products->offset($offset)->limit($limit)->get();
@@ -114,5 +114,13 @@ class ProductController extends Controller
         return response([
             'message' => 'Record deleted successfully'
         ], 200);
+    }
+
+    public function custom1()
+    {
+        return Product::selectRaw('id as product_id, name as product_name')
+            ->orderBy('created_at', 'DESC')
+            ->take(10)
+            ->get();
     }
 }

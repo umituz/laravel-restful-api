@@ -85,4 +85,9 @@ class CategoryController extends Controller
             'message' => 'Record deleted successfully'
         ], 200);
     }
+
+    public function custom1()
+    {
+        return Category::pluck('id','name');
+    }
 }
