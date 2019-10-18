@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -88,6 +89,17 @@ class CategoryController extends Controller
 
     public function custom1()
     {
-        return Category::pluck('id','name');
+        return Category::pluck('id', 'name');
+    }
+
+    public function custom2()
+    {
+        return DB::table('category_product as cp')
+            ->selectRaw('c.name, COUNT(*) as total')
+            ->join('categories as c', 'c.id', '=', 'cp.category_id')
+            ->join('products as p', 'p.id', '=', 'cp.product_id')
+            ->groupBy('c.name')
+            ->orderByRaw('COUNT(*) DESC')
+            ->get();
     }
 }
