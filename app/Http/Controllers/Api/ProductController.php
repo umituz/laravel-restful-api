@@ -23,10 +23,22 @@ class ProductController extends Controller
 //        return response(Product::all(), 200);
 //        return response(Product::paginate(3), 200);
 
-        $offset = $request->offset ?? 0;
-        $limit = $request->limit ?? 3;
+        $offset = $request->has('offset') ? $request->query('offset') : 0;
+        $limit = $request->has('limit') ? $request->query('limit') : 10;
 
-        return response(Product::offset($offset)->limit($limit)->get(), 200);
+        $products = Product::query();
+
+        if ($request->has('q')) {
+            $products->where('name', 'like', '%' . $request->query('q') . '%');
+        }
+
+        if($request->has('sortBy')){
+            $products->orderBy($request->query('sortBy'),$request->query('sort','DESC'));
+        }
+
+        $data = $products->offset($offset)->limit($limit)->get();
+
+        return response($data, 200);
     }
 
     /**
