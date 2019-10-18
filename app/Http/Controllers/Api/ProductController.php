@@ -123,4 +123,23 @@ class ProductController extends Controller
             ->take(10)
             ->get();
     }
+
+    public function custom2()
+    {
+        $products = Product::orderBy('created_at', 'DESC')
+            ->take(10)
+            ->get();
+
+        $mapped = $products->map(function ($product) {
+
+            return [
+                '_id' => $product['id'],
+                'product_name' => $product['name'],
+                'product_price' => $product['price'] * 1.05
+            ];
+
+        });
+
+        return $mapped->all();
+    }
 }
