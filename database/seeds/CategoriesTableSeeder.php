@@ -2,6 +2,7 @@
 
 use App\Category;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
 class CategoriesTableSeeder extends Seeder
@@ -16,7 +17,10 @@ class CategoriesTableSeeder extends Seeder
     {
 //        factory(Category::class,20)->create();
 
-        Category::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        DB::table('categories')->truncate();
+        DB::table('product_category')->truncate();
 
         for ($i = 0; $i < 20; $i++) {
 
@@ -28,5 +32,16 @@ class CategoriesTableSeeder extends Seeder
             ]);
 
         }
+
+        DB::table('product_category')->insert([
+            ['product_id' => 1, 'category_id' => 1],
+            ['product_id' => 1, 'category_id' => 2],
+            ['product_id' => 2, 'category_id' => 1],
+            ['product_id' => 2, 'category_id' => 2],
+            ['product_id' => 2, 'category_id' => 3],
+        ]);
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
     }
 }

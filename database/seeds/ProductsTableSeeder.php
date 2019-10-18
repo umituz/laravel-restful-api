@@ -2,6 +2,7 @@
 
 use App\Product;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ProductsTableSeeder extends Seeder
 {
@@ -12,6 +13,13 @@ class ProductsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Product::class,50)->create();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
+        DB::table('products')->truncate();
+
+        factory(Product::class,30)->create();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+
     }
 }
