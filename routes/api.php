@@ -10,8 +10,9 @@ use Illuminate\Http\Request;
 //    return "hello";
 //});
 
-Route::apiResource('/products','Api\ProductController');
 Route::apiResource('/users','Api\UserController');
+Route::apiResource('/products','Api\ProductController');
+Route::apiResource('/categories','Api\CategoryController');
 
 //Route::apiResources([
 //    'products' => 'Api\ProductController',
