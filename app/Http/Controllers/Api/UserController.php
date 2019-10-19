@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enumerations\ApiEnumeration;
 use App\Http\Requests\User\UserStoreRequest;
 use App\Http\Requests\User\UserUpdateRequest;
 use App\Http\Resources\User\UserCollection;
 use App\Http\Resources\User\UserResource;
 use App\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -92,11 +94,22 @@ class UserController extends ApiController
      * @param User $user
      * @return User
      */
-    public function show(User $user)
+    public function show($id)
     {
 //        return $user;
 
-        return $this->apiResponse($user, 'User fetched successfully', JsonResponse::HTTP_OK);
+        try {
+
+            $user = User::findOrFail($id);
+
+            return $this->apiResponse($user, 'User fetched successfully', JsonResponse::HTTP_OK);
+
+        } catch (ModelNotFoundException $exception) {
+
+            return $this->apiResponse(null, 'User Not Found!!!', JsonResponse::HTTP_NOT_FOUND, ApiEnumeration::ERROR);
+
+        }
+
     }
 
     /**
