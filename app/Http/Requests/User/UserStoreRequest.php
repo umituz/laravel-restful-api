@@ -31,4 +31,16 @@ class UserStoreRequest extends BaseFormRequest
             'password' => 'required|min:6|max:30'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'email.required' => 'Email is necessary thing',
+            'user_name.required' => 'User name is necessary thing',
+            'first_name.required' => 'First name is necessary thing',
+            'last_name.required' => 'Last name is necessary thing',
+            'password.required' => 'Password is necessary thing',
+            'email.unique' => 'Email is must be unique',
+        ];
+    }
 }
