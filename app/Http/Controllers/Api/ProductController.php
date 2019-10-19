@@ -157,4 +157,11 @@ class ProductController extends Controller
 
         return ProductResource::collection($products);
     }
+
+    public function listWithCategories()
+    {
+        $products = Product::get();
+
+        return ProductResource::collection($products);
+    }
 }

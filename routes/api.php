@@ -16,6 +16,7 @@ Route::get('/products/custom1', 'Api\ProductController@custom1')->name('products
 Route::get('/products/custom2', 'Api\ProductController@custom2')->name('products.custom2');
 Route::get('/products/custom3', 'Api\ProductController@custom3')->name('products.custom3');
 Route::get('/products/custom4', 'Api\ProductController@custom4')->name('products.custom4');
+Route::get('/products/listWithCategories', 'Api\ProductController@listWithCategories')->name('products.listWithCategories');
 Route::get('/users/custom1', 'Api\UserController@custom1')->name('users.custom1');
 Route::get('/users/custom2', 'Api\UserController@custom2')->name('users.custom2');
 Route::get('/users/custom3', 'Api\UserController@custom3')->name('users.custom3');
