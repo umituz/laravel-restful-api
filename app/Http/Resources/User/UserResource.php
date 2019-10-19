@@ -24,6 +24,7 @@ class UserResource extends JsonResource
             'user_name' => $this->user_name,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
+            'is_admin' => $this->when($this->id == 1, true)
         ];
 
     }
