@@ -19,7 +19,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return response(Category::with('products')->get(), 200);
+        $category = Category::with('products')->get();
+
+        $category = $category->makeHidden('slug');
+
+        return response($category, 200);
     }
 
     /**
