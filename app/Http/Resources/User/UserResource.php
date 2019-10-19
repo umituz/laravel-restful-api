@@ -17,6 +17,8 @@ class UserResource extends JsonResource
     {
 //        return parent::toArray($request);
 
+        self::withoutWrapping();
+
         return [
             'id' => $this->id,
             'user_name' => $this->user_name,

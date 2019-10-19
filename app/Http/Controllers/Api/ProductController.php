@@ -150,4 +150,11 @@ class ProductController extends Controller
 
         return ProductResource::collection($products);
     }
+
+    public function custom4()
+    {
+        $products = Product::all();
+
+        return ProductResource::collection($products);
+    }
 }
