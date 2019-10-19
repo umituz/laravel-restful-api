@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Category;
-use App\Http\Controllers\Controller;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
-class CategoryController extends Controller
+class CategoryController extends ApiController
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +22,9 @@ class CategoryController extends Controller
 
         $category = $category->makeHidden('slug');
 
-        return response($category, 200);
+//        return response($category, 200);
+
+        return $this->apiResponse($category, 'Categories fetched successfully', 200);
     }
 
     /**
@@ -39,10 +40,12 @@ class CategoryController extends Controller
         $category->slug = Str::slug($request->name);
         $category->save();
 
-        return response([
-            'data' => $category,
-            'message' => 'Record added successfully'
-        ], 201);
+//        return response([
+//            'data' => $category,
+//            'message' => 'Record added successfully'
+//        ], 201);
+
+        return $this->apiResponse($category, 'Categories added successfully', 201);
     }
 
     /**
@@ -53,7 +56,9 @@ class CategoryController extends Controller
      */
     public function show(Category $category)
     {
-        return $category;
+//        return $category;
+
+        return $this->apiResponse($category, 'Category fetched successfully', 200);
     }
 
     /**
@@ -69,10 +74,12 @@ class CategoryController extends Controller
         $category->slug = Str::slug($request->name);
         $category->save();
 
-        return response([
-            'data' => $category,
-            'message' => 'Record edited successfully'
-        ], 200);
+//        return response([
+//            'data' => $category,
+//            'message' => 'Record edited successfully'
+//        ], 200);
+
+        return $this->apiResponse($category, 'Category edited successfully', 200);
     }
 
     /**
@@ -86,9 +93,11 @@ class CategoryController extends Controller
     {
         $category->delete();
 
-        return response([
-            'message' => 'Record deleted successfully'
-        ], 200);
+//        return response([
+//            'message' => 'Record deleted successfully'
+//        ], 200);
+
+        return $this->apiResponse($category, 'Category deleted successfully', 200);
     }
 
     public function custom1()
