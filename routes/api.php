@@ -15,6 +15,7 @@ Route::get('/categories/custom2', 'Api\CategoryController@custom2')->name('categ
 Route::get('/products/custom1', 'Api\ProductController@custom1')->name('products.custom1');
 Route::get('/products/custom2', 'Api\ProductController@custom2')->name('products.custom2');
 Route::get('/users/custom1', 'Api\UserController@custom1')->name('users.custom1');
+Route::get('/users/custom2', 'Api\UserController@custom2')->name('users.custom2');
 
 Route::apiResource('/users', 'Api\UserController');
 Route::apiResource('/products', 'Api\ProductController');

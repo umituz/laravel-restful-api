@@ -118,4 +118,11 @@ class UserController extends Controller
 
         return new UserResource($user2);
     }
+
+    public function custom2()
+    {
+        $users = User::all();
+
+        return UserResource::collection($users);
+    }
 }
