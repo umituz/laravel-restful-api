@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enumerations\ApiEnumeration;
 use App\Http\Resources\User\UserCollection;
 use App\Http\Resources\User\UserResource;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends ApiController
 {
@@ -41,7 +43,10 @@ class UserController extends ApiController
 
         $data->each->setAppends(['full_name']);
 
-        return response($data, 200);
+//        return response($data, 200);
+
+        return $this->apiResponse($data, 'Users fetched successfully', 200);
+
     }
 
     /**
@@ -52,17 +57,33 @@ class UserController extends ApiController
      */
     public function store(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:users',
+            'user_name' => 'required|string|max:30',
+            'first_name' => 'required|string|max:30',
+            'last_name' => 'required|string|max:30',
+            'password' => 'required|min:6|max:30'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->apiResponse($validator->errors(), 'Please, validate the form', 422, ApiEnumeration::ERROR);
+        }
+
         $user = new User();
-        $user->name = $request->name;
+        $user->user_name = $request->user_name;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->email_verified_at = now();
         $user->password = bcrypt($request->password);
         $user->save();
 
-        return response([
-            'data' => $user,
-            'message' => 'Record added successfully'
-        ], 201);
+//        return response([
+//            'data' => $user,
+//            'message' => 'Record added successfully'
+//        ], 201);
+
+        return $this->apiResponse($user, 'Users added successfully', 201);
     }
 
     /**
@@ -73,7 +94,9 @@ class UserController extends ApiController
      */
     public function show(User $user)
     {
-        return $user;
+//        return $user;
+
+        return $this->apiResponse($user, 'User fetched successfully', 200);
     }
 
     /**
@@ -85,15 +108,31 @@ class UserController extends ApiController
      */
     public function update(Request $request, User $user)
     {
-        $user->name = $request->name;
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:users,email,' . $user->id,
+            'user_name' => 'required|string|max:30',
+            'first_name' => 'required|string|max:30',
+            'last_name' => 'required|string|max:30',
+            'password' => 'required|min:6|max:30'
+        ]);
+
+        if ($validator->fails()) {
+            return $this->apiResponse($validator->errors(), 'Please, validate the form', 422, ApiEnumeration::ERROR);
+        }
+
+        $user->user_name = $request->user_name;
+        $user->first_name = $request->first_name;
+        $user->last_name = $request->last_name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->save();
 
-        return response([
-            'data' => $user,
-            'message' => 'Record edited successfully'
-        ], 200);
+//        return response([
+//            'data' => $user,
+//            'message' => 'Record edited successfully'
+//        ], 200);
+
+        return $this->apiResponse($user, 'User edited successfully', 200);
     }
 
     /**
@@ -107,9 +146,11 @@ class UserController extends ApiController
     {
         $user->delete();
 
-        return response([
-            'message' => 'Record deleted successfully'
-        ], 200);
+//        return response([
+//            'message' => 'Record deleted successfully'
+//        ], 200);
+
+        return $this->apiResponse($user, 'User deleted successfully', 200);
     }
 
     public function custom1()

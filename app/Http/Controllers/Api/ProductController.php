@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enumerations\ApiEnumeration;
 use App\Http\Resources\Product\ProductResource;
 use App\Product;
 use Illuminate\Database\Eloquent\Collection;
@@ -38,7 +39,10 @@ class ProductController extends ApiController
 
         $data = $products->offset($offset)->limit($limit)->get();
 
-        return response($data, 200);
+//        return response($data, 200);
+
+        return $this->apiResponse($data, 'Products fetched successfully', 200);
+
     }
 
     /**
@@ -53,10 +57,12 @@ class ProductController extends ApiController
 
         $product = Product::create($inputs);
 
-        return response([
-            'data' => $product,
-            'message' => 'Record added successfully'
-        ], 201);
+//        return response([
+//            'data' => $product,
+//            'message' => 'Record added successfully'
+//        ], 201);
+
+        return $this->apiResponse($product, 'Product added successfully', 201);
     }
 
     /**
@@ -71,12 +77,18 @@ class ProductController extends ApiController
 
         if ($product) {
 
-            return response($product, 200);
+//            return response($product, 200);
+
+            return $this->apiResponse($product, 'Product fetched successfully', 200);
+
+
         } else {
 
-            return response([
-                'message' => 'No Such As Record'
-            ], 404);
+//            return response([
+//                'message' => 'No Such As Record'
+//            ], 404);
+
+            return $this->apiResponse($product, 'No such as product', 404,ApiEnumeration::ERROR);
 
         }
     }
@@ -94,10 +106,13 @@ class ProductController extends ApiController
 
         $product->update($inputs);
 
-        return response([
-            'data' => $product,
-            'message' => 'Record edited successfully'
-        ], 200);
+//        return response([
+//            'data' => $product,
+//            'message' => 'Record edited successfully'
+//        ], 200);
+
+        return $this->apiResponse($product, 'Product edited successfully', 200);
+
     }
 
     /**
@@ -111,9 +126,12 @@ class ProductController extends ApiController
     {
         $product->delete();
 
-        return response([
-            'message' => 'Record deleted successfully'
-        ], 200);
+//        return response([
+//            'message' => 'Record deleted successfully'
+//        ], 200);
+
+        return $this->apiResponse($product, 'Product deleted successfully', 200);
+
     }
 
     public function custom1()

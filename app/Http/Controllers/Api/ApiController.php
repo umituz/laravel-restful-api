@@ -13,16 +13,20 @@ class ApiController extends Controller
 
         $response['success'] = $status == ApiEnumeration::SUCCESS ? true : false;
 
-        if ($status != ApiEnumeration::ERROR) {
-            $response['data'] = $data;
-        }
-
-        if ($status == ApiEnumeration::ERROR) {
-            $response['errors'] = $data;
-        }
-
         if (isset($message) && !is_null($message)) {
             $response['message'] = $message;
+        }
+
+        if (isset($data) && !is_null($data)) {
+
+            if ($status != ApiEnumeration::ERROR) {
+                $response['data'] = $data;
+            }
+
+            if ($status == ApiEnumeration::ERROR) {
+                $response['errors'] = $data;
+            }
+
         }
 
         return response()->json($response, $code);
