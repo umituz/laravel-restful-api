@@ -32,6 +32,14 @@ class UserController extends Controller
 
         $data = $products->offset($offset)->limit($limit)->get();
 
+//        $data->each(function($item){
+//
+//            $item->setAppends(['full_name']);
+//
+//        });
+
+        $data->each->setAppends(['full_name']);
+
         return response($data, 200);
     }
 
