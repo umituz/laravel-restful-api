@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -109,5 +110,12 @@ class UserController extends Controller
         return response([
             'message' => 'Record deleted successfully'
         ], 200);
+    }
+
+    public function custom1()
+    {
+        $user2 = User::find(2);
+
+        return new UserResource($user2);
     }
 }
