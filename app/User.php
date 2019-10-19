@@ -35,6 +35,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'created_at' => 'date:Y-m-d',
+        'updated_at' => 'date:Y-m-d H:i:s'
     ];
 
 //    protected $appends = ['full_name'];
