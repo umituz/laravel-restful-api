@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Enumerations\ApiEnumeration;
+use App\Http\Requests\User\UserStoreRequest;
+use App\Http\Requests\User\UserUpdateRequest;
 use App\Http\Resources\User\UserCollection;
 use App\Http\Resources\User\UserResource;
 use App\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Validator;
 
 class UserController extends ApiController
 {
@@ -45,29 +46,28 @@ class UserController extends ApiController
 
 //        return response($data, 200);
 
-        return $this->apiResponse($data, 'Users fetched successfully', 200);
-
+        return $this->apiResponse($data, 'Users fetched successfully', JsonResponse::HTTP_OK);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param UserStoreRequest $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email|unique:users',
-            'user_name' => 'required|string|max:30',
-            'first_name' => 'required|string|max:30',
-            'last_name' => 'required|string|max:30',
-            'password' => 'required|min:6|max:30'
-        ]);
-
-        if ($validator->fails()) {
-            return $this->apiResponse($validator->errors(), 'Please, validate the form', 422, ApiEnumeration::ERROR);
-        }
+//        $validator = Validator::make($request->all(), [
+//            'email' => 'required|email|unique:users',
+//            'user_name' => 'required|string|max:30',
+//            'first_name' => 'required|string|max:30',
+//            'last_name' => 'required|string|max:30',
+//            'password' => 'required|min:6|max:30'
+//        ]);
+//
+//        if ($validator->fails()) {
+//            return $this->apiResponse($validator->errors(), 'Please, validate the form', 422, ApiEnumeration::ERROR);
+//        }
 
         $user = new User();
         $user->user_name = $request->user_name;
@@ -83,7 +83,7 @@ class UserController extends ApiController
 //            'message' => 'Record added successfully'
 //        ], 201);
 
-        return $this->apiResponse($user, 'Users added successfully', 201);
+        return $this->apiResponse($user, 'Users added successfully', JsonResponse::HTTP_CREATED);
     }
 
     /**
@@ -96,29 +96,29 @@ class UserController extends ApiController
     {
 //        return $user;
 
-        return $this->apiResponse($user, 'User fetched successfully', 200);
+        return $this->apiResponse($user, 'User fetched successfully', JsonResponse::HTTP_OK);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param UserUpdateRequest $request
      * @param User $user
      * @return Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserUpdateRequest $request, User $user)
     {
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email|unique:users,email,' . $user->id,
-            'user_name' => 'required|string|max:30',
-            'first_name' => 'required|string|max:30',
-            'last_name' => 'required|string|max:30',
-            'password' => 'required|min:6|max:30'
-        ]);
-
-        if ($validator->fails()) {
-            return $this->apiResponse($validator->errors(), 'Please, validate the form', 422, ApiEnumeration::ERROR);
-        }
+//        $validator = Validator::make($request->all(), [
+//            'email' => 'required|email|unique:users,email,' . $user->id,
+//            'user_name' => 'required|string|max:30',
+//            'first_name' => 'required|string|max:30',
+//            'last_name' => 'required|string|max:30',
+//            'password' => 'required|min:6|max:30'
+//        ]);
+//
+//        if ($validator->fails()) {
+//            return $this->apiResponse($validator->errors(), 'Please, validate the form', 422, ApiEnumeration::ERROR);
+//        }
 
         $user->user_name = $request->user_name;
         $user->first_name = $request->first_name;
@@ -132,7 +132,7 @@ class UserController extends ApiController
 //            'message' => 'Record edited successfully'
 //        ], 200);
 
-        return $this->apiResponse($user, 'User edited successfully', 200);
+        return $this->apiResponse($user, 'User edited successfully', JsonResponse::HTTP_OK);
     }
 
     /**
@@ -150,7 +150,7 @@ class UserController extends ApiController
 //            'message' => 'Record deleted successfully'
 //        ], 200);
 
-        return $this->apiResponse($user, 'User deleted successfully', 200);
+        return $this->apiResponse($user, 'User deleted successfully', JsonResponse::HTTP_OK);
     }
 
     public function custom1()
