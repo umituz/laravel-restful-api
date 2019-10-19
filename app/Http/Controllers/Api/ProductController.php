@@ -6,6 +6,7 @@ use App\Enumerations\ApiEnumeration;
 use App\Http\Resources\Product\ProductResource;
 use App\Product;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -41,7 +42,7 @@ class ProductController extends ApiController
 
 //        return response($data, 200);
 
-        return $this->apiResponse($data, 'Products fetched successfully', 200);
+        return $this->apiResponse($data, 'Products fetched successfully', JsonResponse::HTTP_OK);
 
     }
 
@@ -62,7 +63,7 @@ class ProductController extends ApiController
 //            'message' => 'Record added successfully'
 //        ], 201);
 
-        return $this->apiResponse($product, 'Product added successfully', 201);
+        return $this->apiResponse($product, 'Product added successfully', JsonResponse::HTTP_CREATED);
     }
 
     /**
@@ -79,7 +80,7 @@ class ProductController extends ApiController
 
 //            return response($product, 200);
 
-            return $this->apiResponse($product, 'Product fetched successfully', 200);
+            return $this->apiResponse($product, 'Product fetched successfully', JsonResponse::HTTP_OK);
 
 
         } else {
@@ -88,7 +89,7 @@ class ProductController extends ApiController
 //                'message' => 'No Such As Record'
 //            ], 404);
 
-            return $this->apiResponse($product, 'No such as product', 404,ApiEnumeration::ERROR);
+            return $this->apiResponse($product, 'No such as product', JsonResponse::HTTP_NOT_FOUND,ApiEnumeration::ERROR);
 
         }
     }
@@ -111,7 +112,7 @@ class ProductController extends ApiController
 //            'message' => 'Record edited successfully'
 //        ], 200);
 
-        return $this->apiResponse($product, 'Product edited successfully', 200);
+        return $this->apiResponse($product, 'Product edited successfully', JsonResponse::HTTP_OK);
 
     }
 
@@ -130,7 +131,7 @@ class ProductController extends ApiController
 //            'message' => 'Record deleted successfully'
 //        ], 200);
 
-        return $this->apiResponse($product, 'Product deleted successfully', 200);
+        return $this->apiResponse($product, 'Product deleted successfully', JsonResponse::HTTP_OK);
 
     }
 

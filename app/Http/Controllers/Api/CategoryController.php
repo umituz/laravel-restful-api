@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Category;
 use Exception;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -24,7 +25,7 @@ class CategoryController extends ApiController
 
 //        return response($category, 200);
 
-        return $this->apiResponse($category, 'Categories fetched successfully', 200);
+        return $this->apiResponse($category, 'Categories fetched successfully', JsonResponse::HTTP_OK);
     }
 
     /**
@@ -45,7 +46,7 @@ class CategoryController extends ApiController
 //            'message' => 'Record added successfully'
 //        ], 201);
 
-        return $this->apiResponse($category, 'Categories added successfully', 201);
+        return $this->apiResponse($category, 'Categories added successfully', JsonResponse::HTTP_CREATED);
     }
 
     /**
@@ -58,7 +59,7 @@ class CategoryController extends ApiController
     {
 //        return $category;
 
-        return $this->apiResponse($category, 'Category fetched successfully', 200);
+        return $this->apiResponse($category, 'Category fetched successfully', JsonResponse::HTTP_OK);
     }
 
     /**
@@ -79,7 +80,7 @@ class CategoryController extends ApiController
 //            'message' => 'Record edited successfully'
 //        ], 200);
 
-        return $this->apiResponse($category, 'Category edited successfully', 200);
+        return $this->apiResponse($category, 'Category edited successfully', JsonResponse::HTTP_OK);
     }
 
     /**
@@ -97,7 +98,7 @@ class CategoryController extends ApiController
 //            'message' => 'Record deleted successfully'
 //        ], 200);
 
-        return $this->apiResponse($category, 'Category deleted successfully', 200);
+        return $this->apiResponse($category, 'Category deleted successfully', JsonResponse::HTTP_OK);
     }
 
     public function custom1()
