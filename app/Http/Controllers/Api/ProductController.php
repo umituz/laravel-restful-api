@@ -160,7 +160,7 @@ class ProductController extends Controller
 
     public function listWithCategories()
     {
-        $products = Product::get();
+        $products = Product::with('categories')->get();
 
         return ProductResource::collection($products);
     }
