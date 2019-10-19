@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
+use App\Http\Resources\User\UserCollection;
+use App\Http\Resources\User\UserResource;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -124,5 +125,25 @@ class UserController extends Controller
         $users = User::all();
 
         return UserResource::collection($users);
+    }
+
+    public function custom3()
+    {
+        $users = User::all();
+
+        return new UserCollection($users);
+    }
+
+    public function custom4()
+    {
+        $users = User::all();
+
+        return UserResource::collection($users)->additional([
+            'meta' => [
+                'total_users' => $users->count(),
+                'method' => 'additional method',
+                'custom_key' => 'custom_value'
+            ]
+        ]);
     }
 }

@@ -16,6 +16,8 @@ Route::get('/products/custom1', 'Api\ProductController@custom1')->name('products
 Route::get('/products/custom2', 'Api\ProductController@custom2')->name('products.custom2');
 Route::get('/users/custom1', 'Api\UserController@custom1')->name('users.custom1');
 Route::get('/users/custom2', 'Api\UserController@custom2')->name('users.custom2');
+Route::get('/users/custom3', 'Api\UserController@custom3')->name('users.custom3');
+Route::get('/users/custom4', 'Api\UserController@custom4')->name('users.custom4');
 
 Route::apiResource('/users', 'Api\UserController');
 Route::apiResource('/products', 'Api\ProductController');
