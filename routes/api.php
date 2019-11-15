@@ -27,6 +27,8 @@ Route::apiResource('/products', 'Api\ProductController');
 Route::apiResource('/categories', 'Api\CategoryController');
 
 
+Route::post('/auth/login', 'Api\AuthController@login')->name('auth.login');
+
 //Route::apiResources([
 //    'products' => 'Api\ProductController',
 //    'users' => 'Api\UserController'
