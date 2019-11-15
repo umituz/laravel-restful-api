@@ -31,3 +31,18 @@ Route::apiResource('/categories', 'Api\CategoryController');
 //    'products' => 'Api\ProductController',
 //    'users' => 'Api\UserController'
 //]);
+
+Route::middleware('apiToken')->group(function () {
+
+
+    Route::get('/auth/token', function (Request $request) {
+        $user = $request->user();
+
+        return response()->json([
+            'full_name' => $user->first_name . ' ' . $user->last_name,
+            'access_token' => $user->api_token,
+            'time' => time()
+        ]);
+    });
+
+});
