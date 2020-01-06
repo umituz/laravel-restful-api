@@ -5,6 +5,10 @@ namespace App\Http\Resources\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * Class UserResource
+ * @package App\Http\Resources\User
+ */
 class UserResource extends JsonResource
 {
     /**

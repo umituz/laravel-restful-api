@@ -5,8 +5,15 @@ namespace App\Http\Resources\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
+/**
+ * Class UserCollection
+ * @package App\Http\Resources\User
+ */
 class UserCollection extends ResourceCollection
 {
+    /**
+     * @var string
+     */
     public $collects = UserResource::class;
 
     /**

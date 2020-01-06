@@ -16,7 +16,7 @@ class ProductController extends ApiController
      * Display a listing of the resource.
      *
      * @param Request $request
-     * @return Product[]|Collection
+     * @return JsonResponse
      */
     public function index(Request $request)
     {
@@ -50,7 +50,7 @@ class ProductController extends ApiController
      * Store a newly created resource in storage.
      *
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
      */
     public function store(Request $request)
     {
@@ -70,7 +70,7 @@ class ProductController extends ApiController
      * Display the specified resource.
      *
      * @param $id
-     * @return Product
+     * @return JsonResponse
      */
     public function show($id)
     {
@@ -99,7 +99,7 @@ class ProductController extends ApiController
      *
      * @param Request $request
      * @param Product $product
-     * @return Response
+     * @return JsonResponse
      */
     public function update(Request $request, Product $product)
     {
@@ -120,7 +120,7 @@ class ProductController extends ApiController
      * Remove the specified resource from storage.
      *
      * @param Product $product
-     * @return Response
+     * @return JsonResponse
      * @throws \Exception
      */
     public function destroy(Product $product)

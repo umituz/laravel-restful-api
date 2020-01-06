@@ -50,8 +50,6 @@ class UserController extends ApiController
 
         $data->each->setAppends(['full_name']);
 
-        dd($data);
-
 //        return response($data, 200);
 
         return $this->apiResponse($data, 'Users fetched successfully', JsonResponse::HTTP_OK);
