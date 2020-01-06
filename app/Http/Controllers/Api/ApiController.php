@@ -5,8 +5,21 @@ namespace App\Http\Controllers\Api;
 use App\Enumerations\ApiEnumeration;
 use App\Http\Controllers\Controller;
 
+/**
+ * Class ApiController
+ * @package App\Http\Controllers\Api
+ */
 class ApiController extends Controller
 {
+    /**
+     * Returns api response
+     *
+     * @param $data
+     * @param null $message
+     * @param int $code
+     * @param int $status
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function apiResponse($data, $message = null, $code = 200, $status = ApiEnumeration::SUCCESS)
     {
         $response = array();
